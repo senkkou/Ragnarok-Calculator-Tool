@@ -70,7 +70,7 @@ public class MainView {
 		vbox = new VBox(10);
 		vbox2 = new VBox(10);
 		hbox = new HBox(110);
-		version = new Label("v0.8.0");
+		version = new Label("v0.8.5");
 		credit = new Label("Rvmj");
 		
 		hbox.getChildren().addAll(version, credit);

@@ -3,9 +3,12 @@ package rct.config;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +16,7 @@ import rct.view.StatView;
 
 public class Build {
 	
+	private ObservableList<String> buildslot;
 	
 	public Build() throws IOException {
 		File buildAch = new File("builds.sav");	
@@ -34,7 +38,7 @@ public class Build {
 		br.close();
 		fr.close();
 		
-		save[slot-1] ="Slot "+slot+","+lvl+","+str+","+agi+","+dex+","+ints+","+vit+","+luk+","+points;
+		save[slot-1] ="Slot "+slot+"*"+","+lvl+","+str+","+agi+","+dex+","+ints+","+vit+","+luk+","+points;
 		String saveF = save[0];
 		
 		for(int i=1;i<9;i++) {
@@ -76,9 +80,28 @@ public class Build {
 		}
 	}
 	
+	private void updateList() throws IOException {
+		List<String> slotList = new ArrayList<>();
+		File buildsav = new File("builds.sav");
+		FileReader fr = new FileReader(buildsav);
+		BufferedReader br = new BufferedReader(fr);
+		
+		String[] slot = br.readLine().split(";");
+		for(int i=0;i<9;i++) {
+			if(slot[i].length()>6) {
+				slotList.add(slot[i].substring(0, 7));
+			} else {
+				slotList.add(slot[i].substring(0,6));
+			}
+			
+		}
+		buildslot = FXCollections.observableArrayList(slotList);
 
-	public ObservableList<String> getList(){
-		ObservableList<String> buildslot = FXCollections.observableArrayList("Slot 1","Slot 2","Slot 3","Slot 4","Slot 5","Slot 6","Slot 7","Slot 8","Slot 9");
+	}
+	
+
+	public ObservableList<String> getList() throws IOException{
+		updateList();
 		return buildslot;
 	}
 	

@@ -57,12 +57,12 @@ public class StatController {
 	}
 	
 	private void doSave() throws NumberFormatException, IOException{
-		build.save(Integer.parseInt(String.valueOf(statV.getSlot_CB().getValue()).substring(5)),  statV.getLevel_tx().getText(), statV.getStr_tx().getText(), statV.getAgi_tx().getText(),statV.getDex_tx().getText(), statV.getInt_tx().getText(), statV.getVit_tx().getText(), statV.getLuk_tx().getText(),statV.getPoints_tx().getText());
-
+		build.save(Integer.parseInt(String.valueOf(statV.getSlot_CB().getValue()).substring(5,6)),  statV.getLevel_tx().getText(), statV.getStr_tx().getText(), statV.getAgi_tx().getText(),statV.getDex_tx().getText(), statV.getInt_tx().getText(), statV.getVit_tx().getText(), statV.getLuk_tx().getText(),statV.getPoints_tx().getText());
+		statV.getSlot_CB().setItems(build.getList());
 	}
 	
 	private void doLoad() throws NumberFormatException, IOException {
-		build.load(Integer.parseInt(String.valueOf(statV.getSlot_CB().getValue()).substring(5)), statV);
+		build.load(Integer.parseInt(String.valueOf(statV.getSlot_CB().getValue()).substring(5,6)), statV);
 		
 	}
 	private void doCalculate(){
@@ -95,8 +95,8 @@ public class StatController {
 	
 	private Boolean doCheck() {
 		try {
-		if(Integer.parseInt(statV.getLevel_tx().getText()) < 1 || Integer.parseInt(statV.getLevel_tx().getText()) > 175) {
-			System.out.println("Level out of range, must be between 1~175");
+		if(Integer.parseInt(statV.getLevel_tx().getText()) < 1 || Integer.parseInt(statV.getLevel_tx().getText()) > 185) {
+			System.out.println("Level out of range, must be between 1~185");
 			return false;
 			
 		}

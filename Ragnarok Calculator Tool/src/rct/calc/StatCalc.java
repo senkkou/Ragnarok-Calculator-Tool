@@ -20,6 +20,17 @@ public class StatCalc {
 	}
 	
 	public void PointsR(int lvl) {
+		if(lvl>178 && lvl!=182){
+			PointsR=PointsR+32;
+			PointsR(lvl-1);
+		}else if(lvl==182) {
+			PointsR=PointsR+35;
+			PointsR(lvl-1);
+		}else if(lvl>175) {
+			PointsR = PointsR+31;	
+			PointsR(lvl-1);
+		} else
+			//mod
 		if(lvl>150) {
 			PointsR = PointsR+(int) Math.floor(6.6+(double)(lvl-1)/7);
 			PointsR(lvl-1);
@@ -58,7 +69,24 @@ public class StatCalc {
 			ALP = ALP +(int) Math.floor(6.6+(double)(AutoLvl-1)/7);
 			AutoLvl++;
 		}
-		AutoLvl =AutoLvl-1;
+		//mod
+		while(ALP<points && AutoLvl<=178) {
+			ALP = ALP +31;
+			AutoLvl++;
+		}
+		while(ALP<points && AutoLvl<=181) {
+			ALP = ALP +32;
+			AutoLvl++;
+		}
+		while(ALP<points && AutoLvl==182) {
+			ALP = ALP +35;
+			AutoLvl++;
+		}
+		while(ALP<points && AutoLvl<=185) {
+			ALP = ALP +32;
+			AutoLvl++;
+		}
+		AutoLvl = AutoLvl-1;
 	}
 
 	public void clearPR() {
